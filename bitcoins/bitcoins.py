@@ -1,14 +1,22 @@
+import urllib.request
 import json
-#preciobtc = json.loads("https://api.coindesk.com/v1/bpi/currentprice.json")
-preciobtc = json.loads(open('bitcoins/bitcoins.json').read())
+from datetime import datetime
 
-def devuelve_precio_actual(accion):
-    if accion == "preguntar.preciobtc":
-        speech = preciobtc
+def devuelve_precio_actual(accion,parameters):
+    url = "http://api.coinmarketcap.com/v1/ticker/"
+    speech = {}
+    hora = datetime.now().strftime('%Y-%m-%d %H:%m')
+    if accion == "mercados.bitcoin.precioactual":
+        moneda = parameters.get("criptomoneda")
+        url = url + moneda
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        preciobtc = json.loads(response.read())
+        speech[0] = "Tomado de https://api.coinmarketcap.com/v1/ticker/"
+        speech[1] = "Actualizado el: " + hora
+        speech[2] = "Precio USD de:" + moneda + " " + str(preciobtc[0]['price_usd']) + "$"
     return speech
 
-
-
-
+# $curl -d '{"result":{"action":"mercados.bitcoin.precioactual","parameters":{"criptomoneda":"Bitcoin"}}}' http://localhost:8080/webhook
 
 

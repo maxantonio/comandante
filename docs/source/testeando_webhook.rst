@@ -20,3 +20,6 @@ Usando comando curl para probar webhook
 --------------------------
  * $ curl -d '{"result":{"action":"comandante.help"}}' http://localhost:5000/webhook
 
+#. Para consultar precios de criptomonedas
+------------------------------------------
+ * $ curl -d '{"result":{"action":"mercados.bitcoin.precioactual","parameters":{"criptomoneda":"Bitcoin"}}}' http://localhost:5000/webhook
