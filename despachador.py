@@ -11,6 +11,8 @@ def makeWebhookResult(req):
         return cumpleanos.devuelve_dias_cumples(accion,parameters)
     if accion == "preguntar.cumpleanos.delmes":
         return cumpleanos.cumples_del_mes(accion,parameters)
+    if accion == "preguntar.cumpleanos.proximo":
+        return cumpleanos.proximo_cumple()
     else:
         return {
             "speech": "ni idea",

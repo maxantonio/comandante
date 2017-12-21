@@ -60,7 +60,27 @@ def cumples_del_mes(accion,parameters):
     slack_message = {"text": speech}
     return send_reponse_message(speech, slack_message)
 
-
+# segun la fecha actual responde cual es el proximo cumpleano
+def proximo_cumple():
+    speech = "Aun no se responder"
+    actual = datetime.now()
+    menor_dif = -1
+    cumpleanero = ""
+    for i, data in enumerate(participantes):
+        fecha_str = data['date']
+        nace = datetime.strptime(fecha_str, '%Y-%m-%d')
+        cumple = nace.replace(actual.year)
+        diferencia = cumple-actual
+        if(diferencia.days<0):
+            cumple = nace.replace(actual.year+1)
+            diferencia = cumple-actual
+        if(diferencia.days<menor_dif) or (menor_dif<0):
+            menor_dif = diferencia.days
+            cumpleanero = data["name"] 
+    speech = "El proximo cumple es de "+cumpleanero+" y es dentro de "+str(menor_dif)+" dias"
+    slack_message = {"text": speech}
+    return send_reponse_message(speech, slack_message)
+    
 def send_reponse_message(speech,slack_message):
     return {
         "speech": speech,
