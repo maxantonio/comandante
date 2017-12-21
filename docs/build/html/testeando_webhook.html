@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="prev" title="Ejemplo de Webhook para devolver los cumples de un grupo de usuarios desde archivo .json" href="example.html" />
+    <link rel="prev" title="Ejemplo de Webhook para devolver los cumples de un grupo de usuarios desde archivo .json" href="pasos_install.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -46,8 +46,8 @@
 <h2>#. Testing para conocer los cumples  del mes actual o un mes en particular<a class="headerlink" href="#testing-para-conocer-los-cumples-del-mes-actual-o-un-mes-en-particular" title="Enlazar permanentemente con este título">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li>$ curl -d  “{«result»:{«action»:»preguntar.cumpleanos.delmes»,»parameters»:{«meses»:»Julio»}}}”  <a class="reference external" href="http://localhost:5000/webhook/cumpleanero">http://localhost:5000/webhook/cumpleanero</a></li>
-<li>$ curl -d  “{«result»:{«action»:»preguntar.cumpleanos.delmes»,»parameters»:{«meses»:»«}}}”  <a class="reference external" href="http://localhost:5000/webhook/cumpleanero">http://localhost:5000/webhook/cumpleanero</a></li>
+<li>$ curl -d  “{«result»:{«action»:»comandante.cumpleanos.delmes»,»parameters»:{«meses»:»Julio»}}}”  <a class="reference external" href="http://localhost:5000/webhook">http://localhost:5000/webhook</a></li>
+<li>$ curl -d  “{«result»:{«action»:»comandante.cumpleanos.delmes»,»parameters»:{«meses»:»«}}}”  <a class="reference external" href="http://localhost:5000/webhook">http://localhost:5000/webhook</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -55,9 +55,9 @@
 <h2>#. Para conocer  el dia segun un usuario en particular<a class="headerlink" href="#para-conocer-el-dia-segun-un-usuario-en-particular" title="Enlazar permanentemente con este título">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li>$ curl -d  “{«result»:{«action»:»preguntar.cumpleanos.dia»,»parameters»:{«usuarios»:»Yadier Abel de Quesada»}}}”  <a class="reference external" href="http://localhost:5000/webhook/cumpleanero">http://localhost:5000/webhook/cumpleanero</a></li>
-<li>$ curl -d  “{«result»:{«action»:»preguntar.cumpleanos.dia»,»parameters»:{«usuarios»:»Jerry Jimenez Tamayo»}}}”  <a class="reference external" href="http://localhost:5000/webhook/cumpleanero">http://localhost:5000/webhook/cumpleanero</a></li>
-<li>$ curl -d  “{«result»:{«action»:»preguntar.cumpleanos.dia»,»parameters»:{«usuarios»:»MAX LOVERA»}}}”  <a class="reference external" href="http://localhost:5000/webhook/cumpleanero">http://localhost:5000/webhook/cumpleanero</a></li>
+<li>$ curl -d  “{«result»:{«action»:»comandante.cumpleanos.dia»,»parameters»:{«usuarios»:»Yadier Abel de Quesada»}}}”  <a class="reference external" href="http://localhost:5000/webhook">http://localhost:5000/webhook</a></li>
+<li>$ curl -d  “{«result»:{«action»:»comandante.cumpleanos.dia»,»parameters»:{«usuarios»:»Jerry Jimenez Tamayo»}}}”  <a class="reference external" href="http://localhost:5000/webhook">http://localhost:5000/webhook</a></li>
+<li>$ curl -d  “{«result»:{«action»:»comandante.cumpleanos.dia»,»parameters»:{«usuarios»:»MAX LOVERA»}}}”  <a class="reference external" href="http://localhost:5000/webhook">http://localhost:5000/webhook</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -65,7 +65,15 @@
 <h2>#. Para conocer los dias que faltan para el cumpleaños de un usuario en particular<a class="headerlink" href="#para-conocer-los-dias-que-faltan-para-el-cumpleanos-de-un-usuario-en-particular" title="Enlazar permanentemente con este título">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li>$ curl -d “{«result»:{«action»:»preguntar.cumpleanos.diasfaltantes»,»parameters»:{«usuarios»:»Yadier Abel de Quesada»}}}” <a class="reference external" href="http://localhost:5000/webhook/cumpleanero">http://localhost:5000/webhook/cumpleanero</a></li>
+<li>$ curl -d “{«result»:{«action»:»comandante.cumpleanos.diasfaltantes»,»parameters»:{«usuarios»:»Yadier Abel de Quesada»}}}” <a class="reference external" href="http://localhost:5000/webhook">http://localhost:5000/webhook</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="para-consultar-la-ayuda">
+<h2>#. Para consultar la ayuda<a class="headerlink" href="#para-consultar-la-ayuda" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>$ curl -d “{«result»:{«action»:»comandante.help»}}” <a class="reference external" href="http://localhost:5000/webhook">http://localhost:5000/webhook</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -80,7 +88,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="example.html" title="capítulo anterior">Ejemplo de Webhook para devolver los cumples de un grupo de usuarios desde archivo .json</a></li>
+      <li>Previous: <a href="pasos_install.html" title="capítulo anterior">Ejemplo de Webhook para devolver los cumples de un grupo de usuarios desde archivo .json</a></li>
   </ul></li>
 </ul>
 </div>

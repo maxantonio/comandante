@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Bienvenido a la documentación de bot Comandante! &#8212; documentación de bootcumpleannero - 1.0.0</title>
+    <title>Consulta al precio bitcoin con Api &#8212; documentación de bootcumpleannero - 1.0.0</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="Instalación y Uso del Api Comandante" href="pasos_install.html" />
+    <link rel="prev" title="Usando comando curl para probar webhook" href="testeando_webhook.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -40,31 +40,23 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="bienvenido-a-la-documentacion-de-bot-comandante">
-<h1>Bienvenido a la documentación de bot Comandante!<a class="headerlink" href="#bienvenido-a-la-documentacion-de-bot-comandante" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contenido:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="pasos_install.html">Instalación y Uso del Api Comandante</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pasos_install.html#primeros-pasos">Primeros Pasos</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="comandante_help.html">Ayuda del Bot Comandante</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="comandante_help.html#contenido">#. Contenido</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="testeando_webhook.html">Usando comando curl para probar webhook</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="testeando_webhook.html#testing-para-conocer-los-cumples-del-mes-actual-o-un-mes-en-particular">#. Testing para conocer los cumples  del mes actual o un mes en particular</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testeando_webhook.html#para-conocer-el-dia-segun-un-usuario-en-particular">#. Para conocer  el dia segun un usuario en particular</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testeando_webhook.html#para-conocer-los-dias-que-faltan-para-el-cumpleanos-de-un-usuario-en-particular">#. Para conocer los dias que faltan para el cumpleaños de un usuario en particular</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testeando_webhook.html#para-consultar-la-ayuda">#. Para consultar la ayuda</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="bitcoins_help.html">Consulta al precio bitcoin con Api</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bitcoins_help.html#ejemplo-de-respuesta-json">Ejemplo de respuesta json</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="consulta-al-precio-bitcoin-con-api">
+<h1>Consulta al precio bitcoin con Api<a class="headerlink" href="#consulta-al-precio-bitcoin-con-api" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="ejemplo-de-respuesta-json">
+<h2>Ejemplo de respuesta json<a class="headerlink" href="#ejemplo-de-respuesta-json" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>{«time»:
+{
+«updated»:»Dec 20, 2017 21:16:00 UTC»,»updatedISO»:»2017-12-20T21:16:00+00:00»,»updateduk»:»Dec 20, 2017 at 21:16 GMT»
+},
+«disclaimer»:»This data was produced from the CoinDesk Bitcoin Price Index (USD).Non-USD currency data converted using hourly conversion rate from openexchangerates.org»,
+«chartName»:
+«Bitcoin»,»bpi»:
+{
+«USD»:{«code»:»USD»,»symbol»:»$»,»rate»:»16,463.7925»,»description»:»United States Dollar»,»rate_float»:16463.7925},
+«GBP»:{«code»:»GBP»,»symbol»:»£»,»rate»:»12,299.0951»,»description»:»British Pound Sterling»,»rate_float»:12299.0951},
+«EUR»:{«code»:»EUR»,»symbol»:»€»,»rate»:»13,860.2248»,»description»:»Euro»,»rate_float»:13860.2248}
+}
+}</p>
 </div>
 </div>
 
@@ -76,8 +68,8 @@
         <div class="sphinxsidebarwrapper"><div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="pasos_install.html" title="próximo capítulo">Instalación y Uso del Api Comandante</a></li>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="testeando_webhook.html" title="capítulo anterior">Usando comando curl para probar webhook</a></li>
   </ul></li>
 </ul>
 </div>
@@ -103,7 +95,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
-      <a href="_sources/index.rst.txt"
+      <a href="_sources/bitcoins_help.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
