@@ -19,4 +19,3 @@ def makeWebhookResult(req):
             # "contextOut": [],
             "source": "apiai-onlinestore-shipping"
         }
-

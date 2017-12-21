@@ -19,7 +19,19 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+    return 'Hello World hook!'
+
+@app.route('/webhook', methods=['POST'])
+#definiendo la macroruta desde donde se extrae el api
+def cumpleanero():
+    req = request.get_json(silent=True, force=True)
+    #res = cumpleanos.despachador(req)
+    res = despachador.makeWebhookResult(req)
+    res = json.dumps(res, indent=4)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
+
 
 
 @app.errorhandler(500)
