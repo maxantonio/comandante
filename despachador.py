@@ -15,7 +15,7 @@ def makeWebhookResult(req):
         speech = comandante_help.devuelve_listado_comando(accion)
 
     #api BTC
-    if accion == "comandante.bitcoin.prize":
+    if accion == "comandante.preguntar.preciobtc":
         speech = bitcoins.devuelve_precio_actual(accion)
 
     #api cumpleannos
