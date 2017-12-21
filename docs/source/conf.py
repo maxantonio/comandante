@@ -115,7 +115,7 @@ html_sidebars = {
 
 # -- Options for HTMLHelp output ------------------------------------------
 
-# Output file base name for HTML help builder.
+# Output file base name for HTML comandante_help builder.
 htmlhelp_basename = 'bootcumpleannerodoc'
 
 
