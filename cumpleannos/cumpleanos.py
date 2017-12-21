@@ -8,7 +8,7 @@ meses = ["Enero", "Febrero", "Marzo", "Abril",
 
 def devuelve_cumples(accion,parameters):
     speech = "no tengo ese dato todavia"
-    if accion == "preguntar.cumpleanos.dia":
+    if accion == "comandante.cumpleanos.dia":
         usuario = parameters.get("usuarios")
         user = busca_usuario(usuario)
         if(user):
@@ -16,12 +16,12 @@ def devuelve_cumples(accion,parameters):
             datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
             fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
             speech = "Su cumple es el " + fecha_cumple
-    slack_message = {"text": speech}
-    return send_reponse_message(speech,slack_message)
+
+    return speech
 
 def devuelve_dias_cumples(accion,parameters):
     speech = "no tengo ese dato todavia"
-    if accion == "preguntar.cumpleanos.diasfaltantes":
+    if accion == "comandante.cumpleanos.diasfaltantes":
         usuario = parameters.get("usuarios")
         user = busca_usuario(usuario)
         if (user):
@@ -38,14 +38,14 @@ def devuelve_dias_cumples(accion,parameters):
                 fecha_final_obj = datetime.strptime(fecha_final, '%d-%m-%Y')
                 diferencia = fecha_final_obj - fecha_actual
             speech =  "Faltan: " + str(abs(diferencia.days)) + " dias para su cumple"
-    slack_message = {"text": speech}
-    return send_reponse_message(speech, slack_message)
+
+    return speech
 
 #recorre el arreglo de usuarios para encontrar fechas correspondientes
 # con el mes en curso o con un mes pasado x parametros
 def cumples_del_mes(accion,parameters):
     speech = "Este mes no hay cumples"
-    if accion == "preguntar.cumpleanos.delmes":
+    if accion == "comandante.cumpleanos.delmes":
         mes = datetime.now().month
         msg = ""
         if(parameters.get("meses") != ""):
@@ -57,17 +57,11 @@ def cumples_del_mes(accion,parameters):
                 msg = msg + data["name"] + " el dia " + str(datetime_object.day) + " - "
     if(msg != ""):
         speech = mes + ":" + msg
-    slack_message = {"text": speech}
-    return send_reponse_message(speech, slack_message)
+
+    return speech
 
 
-def send_reponse_message(speech,slack_message):
-    return {
-        "speech": speech,
-        "displayText": speech,
-        "data": {"slack": slack_message},
-        "source": "apiai-onlinestore-shipping"
-    }
+
 
 def busca_usuario(usuario):
     for i, data in enumerate(participantes):

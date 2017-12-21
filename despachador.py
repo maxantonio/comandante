@@ -1,22 +1,28 @@
 from cumpleannos import cumpleanos
+from bitcoins import bitcoins
+from comandante_help import comandante_help
+
 def makeWebhookResult(req):
-    # accionando = req.get("result").get("action")
     result = req.get("result")
     accion = result.get("action")
     parameters = result.get("parameters")
+    speech = "Lo siento, no tengo ese dato todavia"
 
-    if accion == "preguntar.cumpleanos.dia":
-        return cumpleanos.devuelve_cumples(accion,parameters)
-    if accion == "preguntar.cumpleanos.diasfaltantes":
-        return cumpleanos.devuelve_dias_cumples(accion,parameters)
-    if accion == "preguntar.cumpleanos.delmes":
-        return cumpleanos.cumples_del_mes(accion,parameters)
-    else:
-        return {
-            "speech": "ni idea",
-            "displayText": "speech",
-            "data": {},
-            # "contextOut": [],
-            "source": "apiai-onlinestore-shipping"
-        }
+    if accion == "comandante.help":
+        speech = comandante_help.devuelve_listado_help(accion)
+    if accion == "comandante.cumpleanos.dia":
+        speech = cumpleanos.devuelve_cumples(accion,parameters)
+    if accion == "comandante.cumpleanos.diasfaltantes":
+        speech = cumpleanos.devuelve_dias_cumples(accion,parameters)
+    if accion == "comandante.cumpleanos.delmes":
+        speech = cumpleanos.cumples_del_mes(accion,parameters)
+    return send_reponse_message(speech)
 
+def send_reponse_message(speech):
+    slack_message = {"text": speech}
+    return {
+        "speech": speech,
+        "displayText": speech,
+        "data": {"slack": slack_message},
+        "source": "apiai-onlinestore-shipping"
+    }
