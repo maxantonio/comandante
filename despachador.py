@@ -1,5 +1,5 @@
 from cumpleannos import cumpleanos
-from bitcoins import bitcoins
+#from bitcoins import bitcoins
 from comandante_help import comandante_help
 
 def makeWebhookResult(req):
@@ -10,6 +10,8 @@ def makeWebhookResult(req):
 
     if accion == "comandante.help":
         speech = comandante_help.devuelve_listado_help(accion)
+    if accion == "comandante.help.command":
+        speech = comandante_help.devuelve_listado_comando(accion)
     if accion == "comandante.cumpleanos.dia":
         speech = cumpleanos.devuelve_cumples(accion,parameters)
     if accion == "comandante.cumpleanos.diasfaltantes":
