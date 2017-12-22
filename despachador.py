@@ -1,5 +1,7 @@
+
 from cumpleannos import cumpleanos
 from bitcoins import bitcoins
+from mercados import mercado
 from comandante_help import comandante_help
 
 def makeWebhookResult(req):
@@ -25,6 +27,10 @@ def makeWebhookResult(req):
         speech = cumpleanos.devuelve_dias_cumples(accion,parameters)
     if accion == "comandante.cumpleanos.delmes":
         speech = cumpleanos.cumples_del_mes(accion,parameters)
+
+    #meracdos
+    if accion == "preguntar.mercados.intradia":
+        return mercado.getintradia(parameters)
 
     return send_reponse_message(speech)
 
