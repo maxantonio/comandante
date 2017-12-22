@@ -12,7 +12,7 @@ def devuelve_precio_actual(accion,parameters):
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         preciobtc = json.loads(response.read())
-        speech[0] = "Tomado de https://api.coinmarketcap.com/v1/ticker/"
+        speech[0] = "Tomado de http://api.coinmarketcap.com/v1/ticker/"
         speech[1] = "Actualizado el: " + hora
         speech[2] = "Precio USD de:" + moneda + " " + str(preciobtc[0]['price_usd']) + "$"
     return speech
