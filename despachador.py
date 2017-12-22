@@ -12,10 +12,10 @@ def makeWebhookResult(req):
     m = globals()[methods[1]]
     func = getattr(m, methods[2])
     try:
-        spetch = func(accion, parameters)
+        speech = func(accion, parameters)
     except:
-        spetch = "Lo siento no entiendo que preguntas"
-    return send_reponse_message(spetch)
+        speech = "Lo siento no entiendo que preguntas"
+    return send_reponse_message(speech)
 
 def send_reponse_message(speech):
     slack_message = {"text": speech}
