@@ -8,33 +8,26 @@ def makeWebhookResult(req):
     result = req.get("result")
     accion = result.get("action")
     parameters = result.get("parameters")
-    speech = "Lo siento, no tengo ese dato todavia"
+    speech = get_manager_response(accion,parameters)
+    return send_reponse_message(speech(accion,parameters))
 
-    #ayuda del comandante
-    if accion == "comandante.help":
-        speech = comandante_help.devuelve_listado_help(accion)
-    if accion == "comandante.help.command":
-        speech = comandante_help.devuelve_listado_comando(accion)
+def get_manager_response(accion):
+    try:
+        return {
+            'comandante.help': comandante_help.devuelve_listado_help,
+            'comandante.help.command': comandante_help.devuelve_listado_comando,
+            'mercados.bitcoin.precioactual':bitcoins.devuelve_precio_actual,
+            'comandante.cumpleanos.dia':cumpleanos.devuelve_cumples,
+            'comandante.mercados.intradia': mercado.getintradia,
+            'comandante.cumpleanos.diasfaltantes':cumpleanos.devuelve_dias_cumples,
+            'comandante.cumpleanos.delmes':cumpleanos.cumples_del_mes,
+            'comandante.cumpleanos.proximo':cumpleanos.proximo_cumple
+        }[accion]
+    except:
+        return hook_not_found
 
-    #api BTC
-    if accion == "mercados.bitcoin.precioactual":
-        speech = bitcoins.devuelve_precio_actual(accion,parameters)
-
-    #api cumpleannos
-    if accion == "comandante.cumpleanos.dia":
-        speech = cumpleanos.devuelve_cumples(accion,parameters)
-    if accion == "comandante.cumpleanos.diasfaltantes":
-        speech = cumpleanos.devuelve_dias_cumples(accion,parameters)
-    if accion == "comandante.cumpleanos.delmes":
-        speech = cumpleanos.cumples_del_mes(accion,parameters)
-
-    #meracdos
-    if accion == "preguntar.mercados.intradia":
-        return mercado.getintradia(parameters)
-
-    return send_reponse_message(speech)
-
-
+def hook_not_found( _ , _2 ):
+    return "Lo siento no entiendo que preguntas"
 
 def send_reponse_message(speech):
     slack_message = {"text": speech}

@@ -17,7 +17,7 @@ def devuelve_cumples(accion,parameters):
             fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
             speech = "Su cumple es el " + fecha_cumple
     slack_message = {"text": speech}
-    return send_reponse_message(speech,slack_message)
+    return speech
 
 def devuelve_dias_cumples(accion,parameters):
     speech = "no tengo ese dato todavia"
@@ -38,16 +38,15 @@ def devuelve_dias_cumples(accion,parameters):
                 fecha_final_obj = datetime.strptime(fecha_final, '%d-%m-%Y')
                 diferencia = fecha_final_obj - fecha_actual
             speech =  "Faltan: " + str(abs(diferencia.days)) + " dias para su cumple"
-    slack_message = {"text": speech}
-    return send_reponse_message(speech, slack_message)
+    return speech
 
 #recorre el arreglo de usuarios para encontrar fechas correspondientes
 # con el mes en curso o con un mes pasado x parametros
 def cumples_del_mes(accion,parameters):
     speech = "Este mes no hay cumples"
+    msg = ""
     if accion == "preguntar.cumpleanos.delmes":
         mes = datetime.now().month
-        msg = ""
         if(parameters.get("meses") != ""):
             mes = parameters.get("meses")
         for i, data in enumerate(participantes):
@@ -57,11 +56,10 @@ def cumples_del_mes(accion,parameters):
                 msg = msg + data["name"] + " el dia " + str(datetime_object.day) + " - "
     if(msg != ""):
         speech = mes + ":" + msg
-    slack_message = {"text": speech}
-    return send_reponse_message(speech, slack_message)
+    return speech
 
 # segun la fecha actual responde cual es el proximo cumpleano
-def proximo_cumple():
+def proximo_cumple(accion,parameters):
     speech = "Aun no se responder"
     actual = datetime.now()
     menor_dif = -1
@@ -78,17 +76,8 @@ def proximo_cumple():
             menor_dif = diferencia.days
             cumpleanero = data["name"] 
     speech = "El proximo cumple es de "+cumpleanero+" y es dentro de "+str(menor_dif)+" dias"
-    slack_message = {"text": speech}
-    return send_reponse_message(speech, slack_message)
+    return speech
     
-def send_reponse_message(speech,slack_message):
-    return {
-        "speech": speech,
-        "displayText": speech,
-        "data": {"slack": slack_message},
-        "source": "apiai-onlinestore-shipping"
-    }
-
 def busca_usuario(usuario):
     for i, data in enumerate(participantes):
         if (data['name'] == usuario):
