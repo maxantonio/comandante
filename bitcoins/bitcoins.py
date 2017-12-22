@@ -7,7 +7,7 @@ def devuelve_precio_actual(accion,parameters):
     speech = {}
     hora = datetime.now().strftime('%Y-%m-%d %H:%m')
     if accion == "mercados.bitcoin.precioactual":
-        moneda = parameters.get("criptomoneda")
+        moneda = parameters.get("cryptomonedas")
         url = url + moneda
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
@@ -18,5 +18,3 @@ def devuelve_precio_actual(accion,parameters):
     return speech
 
 # $curl -d '{"result":{"action":"mercados.bitcoin.precioactual","parameters":{"criptomoneda":"Bitcoin"}}}' http://localhost:8080/webhook
-
-
