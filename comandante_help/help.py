@@ -13,11 +13,11 @@ array_comandos = [
     "cumpleanos.delmes: Para saber los cumples de un mes",
 ]
 
-def devuelve_listado_help(accion):
+def help(accion,_):
     if accion == "comandante.help":
         return array_respuestas
 
-def devuelve_listado_comando(accion):
+def comando(accion,_):
     if accion == "comandante.help.command":
         return array_comandos
 

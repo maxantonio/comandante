@@ -1,7 +1,7 @@
 import urllib.request, json
 
 
-def getintradia(accion,parameters):
+def intradia(accion,parameters):
     mercado = parameters.get("mercados")
     url_api = "http://h-kont.herokuapp.com/api/intradia/"+mercado
     intradia = False

@@ -2,7 +2,7 @@ import urllib.request
 import json
 from datetime import datetime
 
-def devuelve_precio_actual(accion,parameters):
+def precioactual(accion,parameters):
     url = "http://api.coinmarketcap.com/v1/ticker/"
     speech = {}
     hora = datetime.now().strftime('%Y-%m-%d %H:%m')

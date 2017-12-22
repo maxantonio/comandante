@@ -1,33 +1,21 @@
 
 from cumpleannos import cumpleanos
 from bitcoins import bitcoins
-from mercados import mercado
-from comandante_help import comandante_help
+from mercados import mercados
+from comandante_help import help
 
 def makeWebhookResult(req):
     result = req.get("result")
     accion = result.get("action")
     parameters = result.get("parameters")
-    speech = get_manager_response(accion,parameters)
-    return send_reponse_message(speech(accion,parameters))
-
-def get_manager_response(accion):
+    methods = accion.split(".")
+    m = globals()[methods[1]]
+    func = getattr(m, methods[2])
     try:
-        return {
-            'comandante.help': comandante_help.devuelve_listado_help,
-            'comandante.help.command': comandante_help.devuelve_listado_comando,
-            'mercados.bitcoin.precioactual':bitcoins.devuelve_precio_actual,
-            'comandante.cumpleanos.dia':cumpleanos.devuelve_cumples,
-            'comandante.mercados.intradia': mercado.getintradia,
-            'comandante.cumpleanos.diasfaltantes':cumpleanos.devuelve_dias_cumples,
-            'comandante.cumpleanos.delmes':cumpleanos.cumples_del_mes,
-            'comandante.cumpleanos.proximo':cumpleanos.proximo_cumple
-        }[accion]
+        spetch = func(accion, parameters)
     except:
-        return hook_not_found
-
-def hook_not_found( _ , _2 ):
-    return "Lo siento no entiendo que preguntas"
+        spetch = "Lo siento no entiendo que preguntas"
+    return send_reponse_message(spetch)
 
 def send_reponse_message(speech):
     slack_message = {"text": speech}
