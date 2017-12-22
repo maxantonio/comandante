@@ -28,7 +28,7 @@ def makeWebhookResult(req):
     if accion == "comandante.cumpleanos.delmes":
         speech = cumpleanos.cumples_del_mes(accion,parameters)
 
-    #meracdos
+    #mercados
     if accion == "preguntar.mercados.intradia":
         return mercado.getintradia(parameters)
 
