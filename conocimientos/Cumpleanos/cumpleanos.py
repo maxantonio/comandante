@@ -1,7 +1,11 @@
 from datetime import datetime
+from firebase import firebase
 import json
 
-participantes = json.loads(open('conocimientos/Cumpleanos/usuarios.json').read())
+firebase = firebase.FirebaseApplication('https://comandante-189618.firebaseio.com/', None)
+
+participantes = result = firebase.get('/usuarios', None) #pendiente registrar los usuarios en firebase
+# participantes = json.loads(open('conocimientos/Cumpleanos/usuarios.json').read())
 meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]

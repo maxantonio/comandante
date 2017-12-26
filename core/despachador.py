@@ -1,7 +1,6 @@
 from conocimientos.Cumpleanos import cumpleanos
 from conocimientos.Crypto import crypto
 from conocimientos.Mercados import mercados
-
 from conocimientos import help
 def makeWebhookResult(req):
     result = req.get("result")
