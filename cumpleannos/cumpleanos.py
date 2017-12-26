@@ -6,7 +6,7 @@ meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
-def dia(parameters):
+def dia(accion, parameters):
     speech = "no tengo ese dato todavia"
     usuario = parameters.get("usuarios")
     user = busca_usuario(usuario)
@@ -17,7 +17,7 @@ def dia(parameters):
         speech = "Su cumple es el " + fecha_cumple
     return speech
 
-def diasfaltantes(parameters):
+def diasfaltantes(accion, parameters):
     speech = "no tengo ese dato todavia"
     usuario = parameters.get("usuarios")
     user = busca_usuario(usuario)
@@ -39,7 +39,7 @@ def diasfaltantes(parameters):
 
 #recorre el arreglo de usuarios para encontrar fechas correspondientes
 # con el mes en curso o con un mes pasado x parametros
-def delmes(parameters):
+def delmes(accion, parameters):
     speech = "Este mes no hay cumples"
     msg = ""
     mes = datetime.now().month
@@ -55,7 +55,7 @@ def delmes(parameters):
     return speech
 
 # segun la fecha actual responde cual es el proximo cumpleano
-def proximo():
+def proximo(accion, parameters):
     actual = datetime.now()
     menor_dif = -1
     cumpleanero = ""
@@ -76,8 +76,10 @@ def proximo():
 def busca_usuario(usuario):
     """
     Retorna usuario dentro de la lista json.
-    >>> busca_usuario(usuario)
-    usuario
+    >>> busca_usuario('Yadier Abel de Quesada')
+    { "name": "Yadier Abel de Quesada",    "date": "1987-07-16"}
+    >>> busca_usuario('Python')
+    False
     """
     for i, data in enumerate(participantes):
         if (data['name'] == usuario):

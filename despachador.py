@@ -1,3 +1,8 @@
+from cumpleannos import cumpleanos
+from bitcoins import bitcoins
+from mercados import mercados
+from comandante_help import help
+
 def makeWebhookResult(req):
     result = req.get("result")
     accion = result.get("action")
@@ -18,4 +23,4 @@ def send_reponse_message(speech):
         "displayText": speech,
         "data": {"slack": slack_message},
         "source": "apiai-onlinestore-shipping"
-    }
+}
