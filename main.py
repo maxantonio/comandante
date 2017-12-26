@@ -4,14 +4,12 @@
 # [START app]
 import logging
 import json
-import os
 
 from flask import Flask
 from flask import make_response
 from flask import request
 
-import despachador
-
+from core import despachador
 
 app = Flask(__name__)
 
@@ -23,7 +21,7 @@ def hello():
 
 @app.route('/webhook', methods=['POST'])
 #definiendo la macroruta desde donde se extrae el api
-def cumpleanero():
+def webhook():
     req = request.get_json(silent=True, force=True)
     #res = cumpleanos.despachador(req)
     res = despachador.makeWebhookResult(req)

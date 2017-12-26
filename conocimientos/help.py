@@ -8,7 +8,7 @@ array_comandos = [
     "btc_prize: Conocer precio BITCOIN",
     "hora: Hora actual",
     "fecha: Fecha actual",
-    "cumpleanos.dia: Para el cumple de un miembro del equipo",
+    "comandante.cumpleanos.dia: Para el cumple de un miembro del equipo",
     "cumpleanos.diasfaltantes: Para conocer los dias faltantes del cumple de un miembro del equipo",
     "cumpleanos.delmes: Para saber los cumples de un mes",
 ]
