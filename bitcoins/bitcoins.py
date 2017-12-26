@@ -2,7 +2,7 @@ import urllib.request
 import json
 from datetime import datetime
 
-def devuelve_precio_actual(accion,parameters):
+def precioactual(accion,parameters):
     moneda = parameters.get("criptomoneda")
     url = "http://api.coinmarketcap.com/v1/ticker/" + moneda
     speech = "Lo siento no encuentro el valor de " + moneda

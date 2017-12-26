@@ -6,62 +6,57 @@ meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
-def devuelve_cumples(accion,parameters):
+def dia(accion,parameters):
     speech = "no tengo ese dato todavia"
-    if accion == "preguntar.cumpleanos.dia":
-        usuario = parameters.get("usuarios")
-        user = busca_usuario(usuario)
-        if(user):
-            fecha = user['date']
-            datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
-            fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
-            speech = "Su cumple es el " + fecha_cumple
+    usuario = parameters.get("usuarios")
+    user = busca_usuario(usuario)
+    if(user):
+        fecha = user['date']
+        datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
+        fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
+        speech = "Su cumple es el " + fecha_cumple
     slack_message = {"text": speech}
-    return send_reponse_message(speech,slack_message)
+    return speech
 
-def devuelve_dias_cumples(accion,parameters):
+def diasfaltantes(accion,parameters):
     speech = "no tengo ese dato todavia"
-    if accion == "preguntar.cumpleanos.diasfaltantes":
-        usuario = parameters.get("usuarios")
-        user = busca_usuario(usuario)
-        if (user):
-            fecha = user['date']
-            fecha_actual = datetime.now()
-            print(fecha_actual)
-            fecha_final_date = datetime.strptime(fecha, '%Y-%m-%d')
-            fecha_final = str(fecha_final_date.day) + "-" + str(fecha_final_date.month) + "-" + str(fecha_actual.year)
+    usuario = parameters.get("usuarios")
+    user = busca_usuario(usuario)
+    if (user):
+        fecha = user['date']
+        fecha_actual = datetime.now()
+        print(fecha_actual)
+        fecha_final_date = datetime.strptime(fecha, '%Y-%m-%d')
+        fecha_final = str(fecha_final_date.day) + "-" + str(fecha_final_date.month) + "-" + str(fecha_actual.year)
+        fecha_final_obj = datetime.strptime(fecha_final, '%d-%m-%Y')
+        diferencia = fecha_final_obj - fecha_actual
+        if (diferencia.days < 0):
+            #msg = "Han pasado:" + str(abs(diferencia.days)) + "dias "
+            fecha_final = str(fecha_final_date.day) + "-" + str(fecha_final_date.month) + "-" + str(fecha_actual.year + 1)
             fecha_final_obj = datetime.strptime(fecha_final, '%d-%m-%Y')
             diferencia = fecha_final_obj - fecha_actual
-            if (diferencia.days < 0):
-                #msg = "Han pasado:" + str(abs(diferencia.days)) + "dias "
-                fecha_final = str(fecha_final_date.day) + "-" + str(fecha_final_date.month) + "-" + str(fecha_actual.year + 1)
-                fecha_final_obj = datetime.strptime(fecha_final, '%d-%m-%Y')
-                diferencia = fecha_final_obj - fecha_actual
-            speech =  "Faltan: " + str(abs(diferencia.days)) + " dias para su cumple"
-    slack_message = {"text": speech}
-    return send_reponse_message(speech, slack_message)
+        speech =  "Faltan: " + str(abs(diferencia.days)) + " dias para su cumple"
+    return speech
 
 #recorre el arreglo de usuarios para encontrar fechas correspondientes
 # con el mes en curso o con un mes pasado x parametros
-def cumples_del_mes(accion,parameters):
+def delmes(accion,parameters):
     speech = "Este mes no hay cumples"
-    if accion == "preguntar.cumpleanos.delmes":
-        mes = datetime.now().month
-        msg = ""
-        if(parameters.get("meses") != ""):
-            mes = parameters.get("meses")
-        for i, data in enumerate(participantes):
-            fecha = data['date']
-            datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
-            if(meses[datetime_object.month-1] == mes):
-                msg = msg + data["name"] + " el dia " + str(datetime_object.day) + " - "
+    msg = ""
+    mes = datetime.now().month
+    if(parameters.get("meses") != ""):
+        mes = parameters.get("meses")
+    for i, data in enumerate(participantes):
+        fecha = data['date']
+        datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
+        if(meses[datetime_object.month-1] == mes):
+            msg = msg + data["name"] + " el dia " + str(datetime_object.day) + " - "
     if(msg != ""):
         speech = mes + ":" + msg
-    slack_message = {"text": speech}
-    return send_reponse_message(speech, slack_message)
+    return speech
 
 # segun la fecha actual responde cual es el proximo cumpleano
-def proximo_cumple():
+def proximo(accion,parameters):
     speech = "Aun no se responder"
     actual = datetime.now()
     menor_dif = -1
@@ -78,17 +73,8 @@ def proximo_cumple():
             menor_dif = diferencia.days
             cumpleanero = data["name"] 
     speech = "El proximo cumple es de "+cumpleanero+" y es dentro de "+str(menor_dif)+" dias"
-    slack_message = {"text": speech}
-    return send_reponse_message(speech, slack_message)
+    return speech
     
-def send_reponse_message(speech,slack_message):
-    return {
-        "speech": speech,
-        "displayText": speech,
-        "data": {"slack": slack_message},
-        "source": "apiai-onlinestore-shipping"
-    }
-
 def busca_usuario(usuario):
     for i, data in enumerate(participantes):
         if (data['name'] == usuario):
