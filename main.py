@@ -23,7 +23,7 @@ def hello():
 #definiendo la macroruta desde donde se extrae el api
 def webhook():
     req = request.get_json(silent=True, force=True)
-    #res = cumpleanos.despachador(req)
+    #res = Cumpleanos.despachador(req)
     res = despachador.makeWebhookResult(req)
     res = json.dumps(res, indent=4)
     r = make_response(res)

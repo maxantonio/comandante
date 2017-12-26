@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 
-participantes = json.loads(open('conocimientos/usuarios.json').read())
+participantes = json.loads(open('conocimientos/Cumpleanos/usuarios.json').read())
 meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
