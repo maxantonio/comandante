@@ -6,7 +6,7 @@ meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
-def dia(accion,parameters):
+def dia(parameters):
     speech = "no tengo ese dato todavia"
     usuario = parameters.get("usuarios")
     user = busca_usuario(usuario)
@@ -15,10 +15,9 @@ def dia(accion,parameters):
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
         speech = "Su cumple es el " + fecha_cumple
-    slack_message = {"text": speech}
     return speech
 
-def diasfaltantes(accion,parameters):
+def diasfaltantes(parameters):
     speech = "no tengo ese dato todavia"
     usuario = parameters.get("usuarios")
     user = busca_usuario(usuario)
@@ -40,7 +39,7 @@ def diasfaltantes(accion,parameters):
 
 #recorre el arreglo de usuarios para encontrar fechas correspondientes
 # con el mes en curso o con un mes pasado x parametros
-def delmes(accion,parameters):
+def delmes(parameters):
     speech = "Este mes no hay cumples"
     msg = ""
     mes = datetime.now().month
@@ -56,8 +55,7 @@ def delmes(accion,parameters):
     return speech
 
 # segun la fecha actual responde cual es el proximo cumpleano
-def proximo(accion,parameters):
-    speech = "Aun no se responder"
+def proximo():
     actual = datetime.now()
     menor_dif = -1
     cumpleanero = ""
@@ -76,6 +74,11 @@ def proximo(accion,parameters):
     return speech
     
 def busca_usuario(usuario):
+    """
+    Retorna usuario dentro de la lista json.
+    >>> busca_usuario(usuario)
+    usuario
+    """
     for i, data in enumerate(participantes):
         if (data['name'] == usuario):
             return data
@@ -83,4 +86,6 @@ def busca_usuario(usuario):
 
 
 
-
+if __name__ == "__main__":
+        import doctest
+        doctest.testmod(verbose=True)
