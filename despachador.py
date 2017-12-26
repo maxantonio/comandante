@@ -9,17 +9,14 @@ def makeWebhookResult(req):
     accion = result.get("action")
     parameters = result.get("parameters")
     speech = "Lo siento, no tengo ese dato todavia"
-
     #ayuda del comandante
     if accion == "comandante.help":
         speech = comandante_help.devuelve_listado_help(accion)
     if accion == "comandante.help.command":
         speech = comandante_help.devuelve_listado_comando(accion)
-
     #api BTC
     if accion == "mercados.bitcoin.precioactual":
         speech = bitcoins.devuelve_precio_actual(accion,parameters)
-
     #api cumpleannos
     if accion == "comandante.cumpleanos.dia":
         speech = cumpleanos.devuelve_cumples(accion,parameters)
@@ -27,11 +24,9 @@ def makeWebhookResult(req):
         speech = cumpleanos.devuelve_dias_cumples(accion,parameters)
     if accion == "comandante.cumpleanos.delmes":
         speech = cumpleanos.cumples_del_mes(accion,parameters)
-
     #mercados
     if accion == "preguntar.mercados.intradia":
         return mercado.getintradia(parameters)
-
     return send_reponse_message(speech)
 
 
