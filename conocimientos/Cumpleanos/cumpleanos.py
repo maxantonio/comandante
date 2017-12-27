@@ -1,7 +1,11 @@
 from datetime import datetime
+from firebase import firebase
 import json
 
-participantes = json.loads(open('conocimientos/Cumpleanos/usuarios.json').read())
+firebase = firebase.FirebaseApplication('https://comandante-189618.firebaseio.com/', None)
+
+participantes = firebase.get('/usuarios', None) #pendiente registrar los usuarios en firebase
+# participantes = json.loads(open('conocimientos/Cumpleanos/usuarios.json').read())
 meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
@@ -15,7 +19,6 @@ def dia(accion,parameters):
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
         speech = "Su cumple es el " + fecha_cumple
-    slack_message = {"text": speech}
     return speech
 
 def diasfaltantes(accion,parameters):
@@ -47,6 +50,8 @@ def delmes(accion,parameters):
     if(parameters.get("meses") != ""):
         mes = parameters.get("meses")
     for i, data in enumerate(participantes):
+        data = participantes[data]
+        print(data)
         fecha = data['date']
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         if(meses[datetime_object.month-1] == mes):
@@ -62,6 +67,7 @@ def proximo(accion,parameters):
     menor_dif = -1
     cumpleanero = ""
     for i, data in enumerate(participantes):
+        data = participantes[data]
         fecha_str = data['date']
         nace = datetime.strptime(fecha_str, '%Y-%m-%d')
         cumple = nace.replace(actual.year)
@@ -77,6 +83,7 @@ def proximo(accion,parameters):
     
 def busca_usuario(usuario):
     for i, data in enumerate(participantes):
+        data = participantes[data]
         if (data['name'] == usuario):
             return data
     return  False
