@@ -6,9 +6,12 @@ meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
-def dia(accion, parameters):
+def dia(_, parameters):
     speech = "no tengo ese dato todavia"
-    usuario = parameters.get("usuarios")
+    try:
+        usuario = parameters.get("usuarios")
+    except:
+        usuario = parameters
     user = busca_usuario(usuario)
     if(user):
         fecha = user['date']
@@ -17,9 +20,12 @@ def dia(accion, parameters):
         speech = "Su cumple es el " + fecha_cumple
     return speech
 
-def diasfaltantes(accion, parameters):
+def diasfaltantes(_, parameters):
     speech = "no tengo ese dato todavia"
-    usuario = parameters.get("usuarios")
+    try:
+        usuario = parameters.get("usuarios")
+    except:
+        usuario = parameters
     user = busca_usuario(usuario)
     if (user):
         fecha = user['date']
@@ -39,12 +45,15 @@ def diasfaltantes(accion, parameters):
 
 #recorre el arreglo de usuarios para encontrar fechas correspondientes
 # con el mes en curso o con un mes pasado x parametros
-def delmes(accion, parameters):
+def delmes(_, parameters):
     speech = "Este mes no hay cumples"
     msg = ""
     mes = datetime.now().month
     if(parameters.get("meses") != ""):
-        mes = parameters.get("meses")
+        try:
+            mes = parameters.get("meses")
+        except:
+            mes = parameters
     for i, data in enumerate(participantes):
         fecha = data['date']
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
@@ -55,7 +64,7 @@ def delmes(accion, parameters):
     return speech
 
 # segun la fecha actual responde cual es el proximo cumpleano
-def proximo(accion, parameters):
+def proximo(accion, _):
     actual = datetime.now()
     menor_dif = -1
     cumpleanero = ""
@@ -77,7 +86,7 @@ def busca_usuario(usuario):
     """
     Retorna usuario dentro de la lista json.
     >>> busca_usuario('Yadier Abel de Quesada')
-    { "name": "Yadier Abel de Quesada",    "date": "1987-07-16"}
+    {'name': 'Yadier Abel de Quesada', 'date': '1987-07-16'}
     >>> busca_usuario('Python')
     False
     """

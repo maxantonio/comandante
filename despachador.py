@@ -1,4 +1,4 @@
-from cumpleannos import cumpleanos
+from cumpleannos import cumpleannos
 from bitcoins import bitcoins
 from mercados import mercados
 from comandante_help import help
