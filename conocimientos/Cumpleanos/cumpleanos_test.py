@@ -1,11 +1,13 @@
 import unittest
+from conocimientos import Cumpleanos
 import cumpleannos
 
 parametro = 'Yadier Abel de Quesada'
+mes = 'Julio'
 class CumpleanosTest(unittest.TestCase):
 
     def test_dia(self):
-        self.assertEqual(cumpleannos.dia('',parametro), "Su cumple es el 16 de Julio")
+        self.assertEqual(Cumpleanos.dia('',parametro), "Su cumple es el 16 de Julio")
         self.assertEqual(cumpleannos.dia('','Python'), "no tengo ese dato todavia")
 
     def test_diasfaltantes(self):
@@ -16,7 +18,8 @@ class CumpleanosTest(unittest.TestCase):
         self.assertEqual(cumpleannos.busca_usuario(parametro),{'name': 'Yadier Abel de Quesada', 'date': '1987-07-16'})
         self.assertFalse(cumpleannos.busca_usuario('Python'))
 
-    def delmes(_, parameters):
+    def test_delmes(self):
+        self.assertNotEqual(cumpleannos.diasfaltantes('', parametro), "no tengo ese dato todavia")
         speech = "Este mes no hay cumples"
         msg = ""
         mes = datetime.now().month
