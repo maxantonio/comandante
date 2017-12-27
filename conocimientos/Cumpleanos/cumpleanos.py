@@ -21,9 +21,9 @@ def dia(_,parameters):
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
         speech = "Su cumple es el " + fecha_cumple
-    slack_message = {"text": speech}
     return speech
 
+#retorna la cantd de dias que faltan para el cumple de un usuario
 def diasfaltantes(_,parameters):
     speech = "no tengo ese dato todavia"
     try:
