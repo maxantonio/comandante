@@ -1,0 +1,1 @@
+print("cargando los conocimientos")
