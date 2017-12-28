@@ -93,13 +93,6 @@ def proximo(_,parameters):
     return speech
     
 def busca_usuario(usuario):
-    """
-    Retorna usuario dentro de la lista json.
-    >>> busca_usuario('Yadier Abel de Quesada')
-    {'name': 'Yadier Abel de Quesada', 'date': '1987-07-16'}
-    >>> busca_usuario('Python')
-    False
-    """
     for i, data in enumerate(participantes):
         data = participantes[data]
         if (data['name'] == usuario):
