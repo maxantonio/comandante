@@ -62,6 +62,7 @@ def delmes(_,parameters):
     if(parameters.get("meses") != ""):
         mes = parameters.get("meses")
     for i, data in enumerate(participantes):
+        data = participantes[data]
         fecha = data['date']
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         if(meses[datetime_object.month-1] == mes):
