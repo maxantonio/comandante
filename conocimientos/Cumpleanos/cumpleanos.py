@@ -10,20 +10,27 @@ meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
-def dia(accion,parameters):
+def dia(_,parameters):
     speech = "no tengo ese dato todavia"
-    usuario = parameters.get("usuarios")
+    try:
+        usuario = parameters.get("usuarios")
+    except:
+        usuario = parameters
     user = busca_usuario(usuario)
     if(user):
         fecha = user['date']
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
         speech = "Su cumple es el " + fecha_cumple
+    slack_message = {"text": speech}
     return speech
 
-def diasfaltantes(accion,parameters):
+def diasfaltantes(_,parameters):
     speech = "no tengo ese dato todavia"
-    usuario = parameters.get("usuarios")
+    try:
+        usuario = parameters.get("usuarios")
+    except:
+        usuario = parameters
     user = busca_usuario(usuario)
     if (user):
         fecha = user['date']
@@ -43,15 +50,18 @@ def diasfaltantes(accion,parameters):
 
 #recorre el arreglo de usuarios para encontrar fechas correspondientes
 # con el mes en curso o con un mes pasado x parametros
-def delmes(accion,parameters):
+def delmes(_,parameters):
     speech = "Este mes no hay cumples"
     msg = ""
     mes = datetime.now().month
+    if (parameters.get("meses") != ""):
+        try:
+            mes = parameters.get("meses")
+        except:
+            mes = parameters
     if(parameters.get("meses") != ""):
         mes = parameters.get("meses")
     for i, data in enumerate(participantes):
-        data = participantes[data]
-        print(data)
         fecha = data['date']
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         if(meses[datetime_object.month-1] == mes):
@@ -61,7 +71,7 @@ def delmes(accion,parameters):
     return speech
 
 # segun la fecha actual responde cual es el proximo cumpleano
-def proximo(accion,parameters):
+def proximo(_,parameters):
     speech = "Aun no se responder"
     actual = datetime.now()
     menor_dif = -1
@@ -82,13 +92,18 @@ def proximo(accion,parameters):
     return speech
     
 def busca_usuario(usuario):
+    """
+    Retorna usuario dentro de la lista json.
+    >>> busca_usuario('Yadier Abel de Quesada')
+    {'name': 'Yadier Abel de Quesada', 'date': '1987-07-16'}
+    >>> busca_usuario('Python')
+    False
+    """
     for i, data in enumerate(participantes):
         data = participantes[data]
         if (data['name'] == usuario):
             return data
     return  False
-
-
 
 if __name__ == "__main__":
         import doctest
