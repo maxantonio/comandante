@@ -102,3 +102,5 @@ def busca_usuario(usuario):
 if __name__ == "__main__":
         import doctest
         doctest.testmod(verbose=True)
+
+#curl -d '{"result":{"action":"conocimientos.cumpleanos.delmes","parameters":{"meses":"Julio"}}}' http://localhost:8080/webhook
