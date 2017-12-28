@@ -67,6 +67,7 @@ def proximo(accion,parameters):
     menor_dif = -1
     cumpleanero = ""
     for i, data in enumerate(participantes):
+        data = participantes[data]
         fecha_str = data['date']
         nace = datetime.strptime(fecha_str, '%Y-%m-%d')
         cumple = nace.replace(actual.year)
@@ -82,6 +83,7 @@ def proximo(accion,parameters):
     
 def busca_usuario(usuario):
     for i, data in enumerate(participantes):
+        data = participantes[data]
         if (data['name'] == usuario):
             return data
     return  False
