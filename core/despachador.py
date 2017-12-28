@@ -7,9 +7,9 @@ def makeWebhookResult(req):
     accion = result.get("action")
     parameters = result.get("parameters")
     methods = accion.split(".")
-    m = globals()[methods[1]]
-    func = getattr(m, methods[2])
     try:
+        m = globals()[methods[1]]
+        func = getattr(m, methods[2])
         speech = func(accion, parameters)
     except:
         speech = "Lo siento no entiendo que preguntas"
