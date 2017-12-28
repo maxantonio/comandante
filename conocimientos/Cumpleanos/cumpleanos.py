@@ -62,6 +62,7 @@ def delmes(_,parameters):
     if(parameters.get("meses") != ""):
         mes = parameters.get("meses")
     for i, data in enumerate(participantes):
+        data = participantes[data]
         fecha = data['date']
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         if(meses[datetime_object.month-1] == mes):
@@ -92,13 +93,6 @@ def proximo(_,parameters):
     return speech
     
 def busca_usuario(usuario):
-    """
-    Retorna usuario dentro de la lista json.
-    >>> busca_usuario('Yadier Abel de Quesada')
-    {'name': 'Yadier Abel de Quesada', 'date': '1987-07-16'}
-    >>> busca_usuario('Python')
-    False
-    """
     for i, data in enumerate(participantes):
         data = participantes[data]
         if (data['name'] == usuario):
@@ -108,3 +102,5 @@ def busca_usuario(usuario):
 if __name__ == "__main__":
         import doctest
         doctest.testmod(verbose=True)
+
+#curl -d '{"result":{"action":"conocimientos.cumpleanos.delmes","parameters":{"meses":"Julio"}}}' http://localhost:8080/webhook
