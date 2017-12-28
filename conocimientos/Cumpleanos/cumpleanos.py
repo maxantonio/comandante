@@ -4,7 +4,7 @@ import json
 
 firebase = firebase.FirebaseApplication('https://comandante-189618.firebaseio.com/', None)
 
-participantes = result = firebase.get('/usuarios', None) #pendiente registrar los usuarios en firebase
+participantes = firebase.get('/usuarios', None) #pendiente registrar los usuarios en firebase
 # participantes = json.loads(open('conocimientos/Cumpleanos/usuarios.json').read())
 meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
@@ -19,7 +19,6 @@ def dia(accion,parameters):
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         fecha_cumple = str(datetime_object.day) + ' de ' + meses[datetime_object.month-1]
         speech = "Su cumple es el " + fecha_cumple
-    slack_message = {"text": speech}
     return speech
 
 def diasfaltantes(accion,parameters):
@@ -51,6 +50,8 @@ def delmes(accion,parameters):
     if(parameters.get("meses") != ""):
         mes = parameters.get("meses")
     for i, data in enumerate(participantes):
+        data = participantes[data]
+        print(data)
         fecha = data['date']
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         if(meses[datetime_object.month-1] == mes):
