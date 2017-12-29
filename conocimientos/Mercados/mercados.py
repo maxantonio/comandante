@@ -2,7 +2,10 @@ import urllib.request, json
 
 
 def intradia(accion,parameters):
-    mercado = parameters.get("mercados")
+    try:
+        mercado = parameters.get("mercados")
+    except:
+        mercado = parameters
     url_api = "http://h-kont.herokuapp.com/api/intradia/"+mercado
     intradia = False
     speech = "Lo siento no encuentro el intradia de "+mercado
