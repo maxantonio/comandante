@@ -1,11 +1,14 @@
 from datetime import datetime
 from firebase import firebase
-#import json
+=======
+from datetime import datetime
+from firebase import firebase
+import json
 
 firebase = firebase.FirebaseApplication('https://comandante-189618.firebaseio.com/', None)
 
 participantes = firebase.get('/usuarios', None) #pendiente registrar los usuarios en firebase
-#participantes = json.loads(open('usuarios.json').read())
+# participantes = json.loads(open('conocimientos/Cumpleanos/usuarios.json').read())
 meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
@@ -53,15 +56,14 @@ def diasfaltantes(_,parameters):
 def delmes(_,parameters):
     speech = "Este mes no hay cumples"
     msg = ""
-    try:
-        mes = parameters.get("meses")
-    except:
-        mes = parameters
-    try:
-        if(meses.index(mes)>=0):
+    mes = datetime.now().month
+    if (parameters.get("meses") != ""):
+        try:
+            mes = parameters.get("meses")
+        except:
             mes = parameters
-    except:
-        mes = datetime.now().month
+    if(parameters.get("meses") != ""):
+        mes = parameters.get("meses")
     for i, data in enumerate(participantes):
         data = participantes[data]
         fecha = data['date']
@@ -94,13 +96,6 @@ def proximo(_,parameters):
     return speech
     
 def busca_usuario(usuario):
-    """
-    Retorna usuario dentro de la lista json.
-    >>> busca_usuario('Yadier Abel de Quesada')
-    {'name': 'Yadier Abel de Quesada', 'date': '1987-07-16'}
-    >>> busca_usuario('Python')
-    False
-    """
     for i, data in enumerate(participantes):
         data = participantes[data]
         if (data['name'] == usuario):
@@ -110,3 +105,6 @@ def busca_usuario(usuario):
 if __name__ == "__main__":
         import doctest
         doctest.testmod(verbose=True)
+
+#curl -d '{"result":{"action":"conocimientos.cumpleanos.delmes","parameters":{"meses":"Julio"}}}' http://localhost:8080/webhook
+

@@ -20,3 +20,4 @@ def intradia(accion,parameters):
         speech = "El precio actual de "+str(intradia["symbol"])+" es $"+str(intradia["price"])+", con un cambio de "+\
                  str(intradia["percent"])+" y un volumen de "+str(intradia["volume"])+". Obtenido el "+str(intradia["date"])+" a las "+intradia["time"]
     return speech
+#curl -d '{"result":{"action":"conocimientos.mercados.delmes","parameters":{"meses":"Julio"}}}' http://localhost:8080/webhook
