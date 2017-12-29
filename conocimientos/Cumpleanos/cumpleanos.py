@@ -1,11 +1,11 @@
 from datetime import datetime
-from firebase import firebase
+#from firebase import firebase
 import json
 
-firebase = firebase.FirebaseApplication('https://comandante-189618.firebaseio.com/', None)
+#firebase = firebase.FirebaseApplication('https://comandante-189618.firebaseio.com/', None)
 
-participantes = firebase.get('/usuarios', None) #pendiente registrar los usuarios en firebase
-# participantes = json.loads(open('conocimientos/Cumpleanos/usuarios.json').read())
+#participantes = firebase.get('/usuarios', None) #pendiente registrar los usuarios en firebase
+participantes = json.loads(open('usuarios.json').read())
 meses = ["Enero", "Febrero", "Marzo", "Abril",
          "Mayo", "Junio", "Julio", "Agosto",
          "Septiembre", "Octubre", "Noviembre", "Diciembre"]
@@ -53,15 +53,17 @@ def diasfaltantes(_,parameters):
 def delmes(_,parameters):
     speech = "Este mes no hay cumples"
     msg = ""
-    mes = datetime.now().month
-    if (parameters.get("meses") != ""):
-        try:
-            mes = parameters.get("meses")
-        except:
-            mes = parameters
-    if(parameters.get("meses") != ""):
+    try:
         mes = parameters.get("meses")
+    except:
+        mes = parameters
+    try:
+        if(meses.index(mes)>=0):
+            mes = parameters
+    except:
+        mes = datetime.now().month
     for i, data in enumerate(participantes):
+        data = participantes[data]
         fecha = data['date']
         datetime_object = datetime.strptime(fecha, '%Y-%m-%d')
         if(meses[datetime_object.month-1] == mes):

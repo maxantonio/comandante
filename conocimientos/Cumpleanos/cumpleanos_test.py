@@ -17,11 +17,12 @@ class CumpleanosTest(unittest.TestCase):
         self.assertFalse(cumpleanos.busca_usuario('Python'))
 
     def test_delmes(self):
-        self.assertNotEqual(cumpleanos.test_delmes('', testmes), "Este mes no hay cumples")
+        self.assertNotEqual(cumpleanos.delmes('', testmes), "Este mes no hay cumples")
+        self.assertEqual(cumpleanos.delmes('', "Python"), "Este mes no hay cumples")
 
     # segun la fecha actual responde cual es el proximo cumpleano
     def test_proximo(self):
-        self.assertNotEqual(cumpleanos.test_proximo('', testmes), "Aun no se responder")
+        self.assertNotEqual(cumpleanos.proximo('', testmes), "Aun no se responder")
 
 
 if __name__ == "__main__":
