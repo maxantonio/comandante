@@ -1,10 +1,5 @@
 from datetime import datetime
 from firebase import firebase
-=======
-from datetime import datetime
-from firebase import firebase
-import json
-
 firebase = firebase.FirebaseApplication('https://comandante-189618.firebaseio.com/', None)
 
 participantes = firebase.get('/usuarios', None) #pendiente registrar los usuarios en firebase
